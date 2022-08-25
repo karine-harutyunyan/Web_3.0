@@ -1,0 +1,5 @@
+Օգտվել եմ հետևյալ վիդեոներից և հոդվածից
+---https://www.youtube.com/watch?v=EaEptLFhRyw&list=PLmpc3xvYSk4x_U853ulNXm8UzcXrYl9i4&index=1
+---https://www.digitalocean.com/community/tutorials/how-to-create-a-web-server-in-node-js-with-the-http-module-ru
+
+Ընդհանուր խնդիրներ չեմ ունեցել, միայն սկզբում Visual Studio-ում չէի կարող Run անել, հետո խնդիրը գտա՝ node.js նոր տարբերակը չէի քաշել, հենց որ նորը քաշեցի աշխատեց։
