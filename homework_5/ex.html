@@ -1,0 +1,21 @@
+<html>
+    <head>
+    </head>
+    
+    <body>
+    
+        <input id="number"> <br> <br>
+        <button onclick="script()">Click</button>
+        <h1 id="msg">  </h1>
+    </body>  
+</html>
+<Script>
+    
+    function script()
+    {
+            var number = document.querySelector("#number")
+            var msg = document.querySelector("#msg")
+            msg.innerHTML = number.value
+        
+    };
+</Script>

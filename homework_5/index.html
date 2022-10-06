@@ -1,0 +1,46 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <input id="number"> <br> <br>
+        <button onclick="script()">Click</button>
+        <h1 id="factorial">  </h1>
+    </body>  
+</html>
+<script>
+    
+    function script()
+    {
+        server_request("factorial_web.js", "POST", server_response(factorial));
+        server_response();
+    };
+    var num = document.querySelector("#number");
+
+    function server_request(url, method, func_name) {
+        const xhr = new XMLHttpRequest()
+        xhr.open("POST", "factorial_web.js", true)
+        xhr.setRequestHeader("Content-type", "application/json")
+        xhr.send(num)
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    func_name();
+                    return xhr.response    
+            }  
+                else if (xhr.status === 404) {
+                console.log("File or resource not found")
+            }
+        };
+        xhr.onerror = function() {
+        console.log("Network error occurred")
+        };
+    };
+
+    function server_response(data) {
+        var f = document.querySelector("factorial")
+        f.value = data
+        return f
+    };
+};
+
+</script>
