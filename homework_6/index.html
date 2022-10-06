@@ -1,0 +1,38 @@
+<html>
+    <head>
+    </head>
+    <body onload="script();">
+        <p id="factorial"></p>
+    </body>  
+</html>
+<script>
+    var express = require('express')
+    var cors = require('cors')
+    var app = express()
+ 
+    app.use(cors())
+    
+    function script(){
+    
+        const xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    document.getElementById("factorial").textContent = xhr.responseText;    
+            }  
+                if (xhr.status === 404) {
+                console.log("File or resource not found")
+            }
+        };
+        xhr.onerror = function() {
+        console.log("Network error occurred")
+        };
+    };
+    xhr.open("get", "test.txt", true)
+    xhr.send()
+
+
+
+};
+
+</script>
