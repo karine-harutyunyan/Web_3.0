@@ -1,0 +1,48 @@
+<html>
+    <head>
+    </head>
+    <body onload="script();">
+        <p id="hello_world"></p>
+    </body>  
+</html>
+<script>
+    function script(){
+        // fetch('http://localhost:8080')
+        // .then(res => res.json())
+        // .then(res => console.log(res));
+
+        // const fetchPromise = fetch('http://localhost:8080');
+
+        // console.log(fetchPromise);
+
+        // fetchPromise.then((response) => {
+        // console.log(`Received response: ${response.status}`);
+        // });
+
+        // console.log("Started request…");
+    
+        const xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    document.getElementById("hello_world").textContent = xhr.responseText;    
+            }  
+                if (xhr.status === 404) {
+                console.log("File or resource not found")
+            }
+        };
+        xhr.onerror = function() {
+        console.log("Network error occurred")
+        };
+    };
+    xhr.open("GET", "http://localhost:3000", true)
+    xhr.send(null)
+
+
+
+};
+
+</script>
+
+
+</html>
