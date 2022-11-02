@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <label>Row:</label><br>
+    <input type="text" id="row"><br>
+    <label>Column:</label><br>
+    <input type="text" id="col"><br>
+    <button type="submit" id="but">Submit</button>
+    <div id="table"></div>
+
+    
+<script>
+    var row = ""
+    var col = ""
+    var col_row_array = []
+    var i = 0;
+    var j = 0;
+
+    
+
+    document.getElementById("but").onclick = function() {
+        row = document.getElementById("row").value
+        col = document.getElementById("col").value
+        col_row_array = JSON.stringify({col, row})
+        image_position = JSON.stringify({i, j})
+
+        const xhr = new XMLHttpRequest()
+        xhr.open("POST", "http://localhost:8080/", true)
+        xhr.setRequestHeader( "Content-Type", "application/json")
+        xhr.send(col_row_array, image_position)
+        console.log(col_row_array, image_position)
+        xhr.onreadystatechange = function(col_row_array) {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    var arr = JSON.parse(xhr.response)
+                    console.log(arr)
+                    var persone_img = "<img src='https://www.clipartmax.com/png/middle/2-25291_person-png-free-clip-art-images-freeclipart-pw-clipart-male-toilet-sign.png' width=3% />"
+                    var table = `
+                        <style>
+                            td, tr {
+                                border:1px solid black;
+                                border-collapse: collapse;
+                                width: 50px;
+                                height: 50px;
+                            }
+                        </style>`
+                    table += "<table>"
+                    x = arr.length
+                    y = arr[0].length
+                    for (m = 0; m <= x - 1; m++) {  
+                        table += `<tr>`  
+                        for (n = 0; n <= y - 1; n++) {
+                            if (m == i && n == j)
+                            {   
+                                console.log(i, j)
+                                table += `<td bgcolor='MediumSeaGreen'>${persone_img} </td>`
+                            }
+                            else if (arr[m][n] == 0) 
+                            {
+                                table += `<td bgcolor='MediumSeaGreen'> </td>`
+                            }
+                
+                            else if (arr[m][n] == 1) 
+                            {
+                                table += `<td bgcolor='Gray'> </td>`
+                            }
+                            else if (arr[m][n] == 2) 
+                            {
+                                table += `<td bgcolor='DodgerBlue'> </td>`   
+                            } 
+                                    
+                        };
+                        table += `</tr>`
+                    };
+
+                    table += "</table>"    
+                    };
+                    document.getElementById("table").innerHTML = table
+            
+        
+                if (xhr.status === 404) {
+                    console.log("File or resource not found")
+                };
+            };
+            document.onkeydown = function func(e)
+                {
+                var keyName = e.key;
+                if (keyName === "ArrowDown") 
+                {
+                    i--
+                    console.log(i, j)
+                };
+
+                if (keyName === "ArrowUp") 
+                {
+                    i++
+                    console.log(i, j)
+                };
+
+                if (keyName === "ArrowLeft") 
+                {
+                    j--
+                    console.log(i, j)
+                };
+
+                if (keyName === "ArrowRight") 
+                {
+                    j++
+                    console.log(i, j)
+                };
+                console.log(e);
+        }
+        xhr.onerror = function() {
+            console.log("Network error occurrSed")
+            };
+        };
+
+    }
+       
+</script>
+
+</body>
+</html>
